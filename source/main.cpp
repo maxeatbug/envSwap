@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	VPADRead(VPAD_CHAN_0, &status, 1, &err);
 	
 	environment = GetEnvironmentName();
+	os_printf("Checking Environment...");
 
 	if (environment.compare("legacy") == 0)
 	{
@@ -50,12 +51,17 @@ int main(int argc, char **argv)
 
 
 	defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
-
+	os_printf("Modifying file:fs:/vol/external01/wiiu/environments/default.cfg");
 	if (isAroma)
+	{
 		fputs("tiramisu", defaultcfg);
+		os_printf("Wrorte \'tiramisu\' to /environments/default.cfg");
+	}
 	else
+	{
 		fputs("aroma", defaultcfg);
-
+		os_printf("Wrorte \'aroma\' to /environments/default.cfg");
+	}
 	fclose(defaultcfg);	
 	
 	if (isAroma)
@@ -83,6 +89,7 @@ int main(int argc, char **argv)
 	fclose(autobootcfg);
 
 	finishedSuccessfully = true;
+	os_printf("Success!");
 exit:
 	if (finishedSuccessfully)
 		os_printf("Rebooting in 5 seconds...");
