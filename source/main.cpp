@@ -1,7 +1,5 @@
 #include "main.hpp"
 
-int gClient = -1;
-
 int main(int argc, char **argv)
 {
 	// wii u boilerplate start
@@ -32,6 +30,7 @@ int main(int argc, char **argv)
         OSSleepTicks(OSMillisecondsToTicks(3000));
         return exit();
     }
+
 	// wii u boilerplate end
 
 	run_boot_change();
@@ -47,7 +46,6 @@ int exit()
 
 int run_boot_change()
 {
-	
 	OSScreenClearBuffer(0);
 	
 	bool isAroma = true;
@@ -66,11 +64,11 @@ int run_boot_change()
 	else
 		fputs("aroma", defaultcfg);
 
-	fclose(defaultcfg);
-
+	fclose(defaultcfg);	
+	
 
 	FILE *autobootcfg;
-	
+
 	if (isAroma)
 	{
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg", "w");

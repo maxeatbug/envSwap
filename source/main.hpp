@@ -10,7 +10,8 @@
 int run_boot_change();
 int exit();
 
-static int lineNumber = 0;
+int gClient = -1;
+int lineNumber = 0;
 
 #define OSScreenPutFont(row, column, buffer) ({ \
     OSScreenPutFontEx(SCREEN_TV, row, column, buffer); \
