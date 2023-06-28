@@ -37,9 +37,9 @@ int gClient = -1;
 #define SD_PATH                                "fs:/vol/external01/"
 #define DEFAULT_ENVIRONMENT_PATH               "wiiu/environments/"
 #define DEFAULT_ENVIRONMENT_SD_PATH            SD_PATH DEFAULT_ENVIRONMENT_PATH
-#define DEFAULT_AROMA_ENVIRONMENT_PATH         "wiiu/environments/aroma/"
+#define DEFAULT_AROMA_ENVIRONMENT_PATH         "wiiu/environments/aroma"
 #define DEFAULT_AROMA_ENVIRONMENT_SD_PATH      SD_PATH DEFAULT_AROMA_ENVIRONMENT_PATH
-#define DEFAULT_TIRAMISU_ENVIRONMENT_PATH      "wiiu/environments/tiramisu/"
+#define DEFAULT_TIRAMISU_ENVIRONMENT_PATH      "wiiu/environments/tiramisu"
 #define DEFAULT_TIRAMISU_ENVIRONMENT_SD_PATH   SD_PATH DEFAULT_TIRAMISU_ENVIRONMENT_PATH
 
 // dont question it :)
@@ -48,7 +48,7 @@ void OSLaunchTitle(uint64_t titleId, int argc)
     OSLaunchTitlel(titleId, argc);
 }
 
-std::string GetEnvironmentName()
+const std::string GetEnvironmentName()
 {
     char environmentPathBuffer[0x100];
     MochaUtilsStatus status;
@@ -65,8 +65,21 @@ std::string GetEnvironmentName()
         return "legacy";
 }
 
+std::string FixPathForFSA(std::string path)
+{
+    std::string prefix = "fs:/vol";
+    std::string replacement = "/vol";
+
+    if (path.substr(0, prefix.size()) == prefix) {
+        path.replace(0, prefix.size(), replacement);
+    }
+    
+    return path;
+}
+
 bool CheckFolderExist(std::string path) {
     FSADirectoryHandle handle = -1;
+    path = FixPathForFSA(path);
     char* pathChars = new char[path.size() + 1];
     std::copy(path.begin(), path.end(), pathChars);
     if (FSAOpenDir(gClient, pathChars, &handle) != FS_ERROR_OK) {

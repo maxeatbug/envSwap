@@ -8,33 +8,30 @@ int main(int argc, char **argv)
     WHBLogCafeInit();
 
     if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
-        WHBLogPrintf("Mocha_InitLibrary failed");
-        WHBLogConsoleDraw();
+        os_printf("Mocha_InitLibrary failed");
         return exit();
     }
 
     FSAInit();
     gClient = FSAAddClient(NULL);
     if (gClient == 0) {
-        WHBLogPrintf("Failed to add FSAClient");
-        WHBLogConsoleDraw();
+        os_printf("Failed to add FSAClient");
         return exit();
     }
     if (Mocha_UnlockFSClientEx(gClient) != MOCHA_RESULT_SUCCESS) {
         FSADelClient(gClient);
-        WHBLogPrintf("Failed to add FSAClient");
-        WHBLogConsoleDraw();
+        os_printf("Failed to add FSAClient");
         return exit();
     }
 	// wii u boilerplate end
 
 	return run_boot_change();
-	exit();
 }
 
 int exit()
 {
-	os_printf("An error occured! Returning to menu in 5 seconds...");
+	os_printf("An error occurred! Returning to menu in 5 seconds...");
+	OSScreenFlipBuffers();
 	OSSleepTicks(OSSecondsToTicks(5));
     WHBLogConsoleFree();
     WHBProcShutdown();
