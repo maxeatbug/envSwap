@@ -17,3 +17,5 @@ Huge thanks to:
 [Ingunar](https://github.com/Ingunar) - All of the awesome icons & graphics<br>
 [Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing<br>
 [WiiUReboot](https://github.com/Fangal-Airbag/) - Originally used as a foundation for this project<br>
+
+<sup><sub>The Wii U is a registered trademark of Nintendo, who we are not affilated with.</sub></sup>
