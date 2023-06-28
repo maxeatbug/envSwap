@@ -12,6 +12,22 @@ int main(int argc, char **argv)
         WHBLogConsoleDraw();
         return exit();
     }
+
+    FSAInit();
+    gClient = FSAAddClient(NULL);
+    if (gClient == 0) {
+        WHBLogPrintf("Failed to add FSAClient");
+        WHBLogConsoleDraw();
+        OSSleepTicks(OSMillisecondsToTicks(3000));
+        return exit();
+    }
+    if (Mocha_UnlockFSClientEx(gClient) != MOCHA_RESULT_SUCCESS) {
+        FSADelClient(gClient);
+        WHBLogPrintf("Failed to add FSAClient");
+        WHBLogConsoleDraw();
+        OSSleepTicks(OSMillisecondsToTicks(3000));
+        return exit();
+    }
 	// wii u boilerplate end
 
 	return run_boot_change();
@@ -43,14 +59,18 @@ int run_boot_change()
 	{
 		os_printf("Current Environment is Aroma, Swapping to Tiramisu.");
 		isAroma = true;
+		if (!CheckEnvironmentExist("tiramisu"))
+			return exit();
 	}
 	else if (environment.compare("tiramisu") == 0)
 	{
 		os_printf("Current Environment is Tiramisu, Swapping to Aroma.");
 		isAroma = false;
+		if (!CheckEnvironmentExist("aroma"))
+			return exit();
 	}
 	else 
-		isAroma = false; // avoid compiler note :)
+		isAroma = false; // avoid compiler note :P
 
 
 	FILE *defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");

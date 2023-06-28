@@ -12,6 +12,7 @@ int run_boot_change();
 int exit();
 
 int lineNumber = 0;
+int gClient = -1;
 
 #define OSScreenPutFont(row, column, buffer) ({ \
     OSScreenPutFontEx(SCREEN_TV, row, column, buffer); \
@@ -34,9 +35,11 @@ int lineNumber = 0;
 })
 
 #define SD_PATH                                "fs:/vol/external01/"
-#define DEFAULT_AROMA_ENVIRONMENT_PATH         "wiiu/environments/aroma"
+#define DEFAULT_ENVIRONMENT_PATH               "wiiu/environments/"
+#define DEFAULT_ENVIRONMENT_SD_PATH            SD_PATH DEFAULT_ENVIRONMENT_PATH
+#define DEFAULT_AROMA_ENVIRONMENT_PATH         "wiiu/environments/aroma/"
 #define DEFAULT_AROMA_ENVIRONMENT_SD_PATH      SD_PATH DEFAULT_AROMA_ENVIRONMENT_PATH
-#define DEFAULT_TIRAMISU_ENVIRONMENT_PATH      "wiiu/environments/tiramisu"
+#define DEFAULT_TIRAMISU_ENVIRONMENT_PATH      "wiiu/environments/tiramisu/"
 #define DEFAULT_TIRAMISU_ENVIRONMENT_SD_PATH   SD_PATH DEFAULT_TIRAMISU_ENVIRONMENT_PATH
 
 // dont question it :)
@@ -45,7 +48,7 @@ void OSLaunchTitle(uint64_t titleId, int argc)
     OSLaunchTitlel(titleId, argc);
 }
 
-const std::string GetEnvironmentName()
+std::string GetEnvironmentName()
 {
     char environmentPathBuffer[0x100];
     MochaUtilsStatus status;
@@ -60,4 +63,23 @@ const std::string GetEnvironmentName()
         return "tiramisu";
     else
         return "legacy";
+}
+
+bool CheckEnvironmentExist(std::string environmentName)
+{
+    if (CheckFolderExist(DEFAULT_ENVIRONMENT_SD_PATH + environmentName))
+        return true;
+    return false;
+}
+
+bool CheckFolderExist(std::string path) {
+    FSADirectoryHandle handle = -1;
+    char* pathChars = new char[path.size() + 1];
+    std::copy(path.begin(), path.end(), pathChars);
+    if (FSAOpenDir(gClient, pathChars, &handle) != FS_ERROR_OK) {
+        return false;
+    }
+
+    FSACloseDir(gClient, handle);
+    return true;
 }
