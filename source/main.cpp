@@ -49,23 +49,24 @@ int main(int argc, char **argv)
 			goto exit;
 	}
 
-
+	
+	os_printf("Modifying file: \'fs:/vol/external01/wiiu/environments/default.cfg\'");
 	defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
-	os_printf("Modifying file:fs:/vol/external01/wiiu/environments/default.cfg");
 	if (isAroma)
 	{
 		fputs("tiramisu", defaultcfg);
-		os_printf("Wrorte \'tiramisu\' to /environments/default.cfg");
+		os_printf("Wrote \'tiramisu\' to /environments/default.cfg");
 	}
 	else
 	{
 		fputs("aroma", defaultcfg);
-		os_printf("Wrorte \'aroma\' to /environments/default.cfg");
+		os_printf("Wrote \'aroma\' to /environments/default.cfg");
 	}
 	fclose(defaultcfg);	
 	
 	if (isAroma)
 	{
+		os_printf("Modifying file: \'fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg\'");
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg", "w");
 		if (status.hold & VPAD_BUTTON_B)
 		{
@@ -81,6 +82,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
+		os_printf("Modifying file: \'fs:/vol/external01/wiiu/environments/aroma/autoboot.cfg\'");
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/aroma/autoboot.cfg", "w");
 		fputs("wiiu_menu", autobootcfg);
 		os_printf("Wrote \'wiiu_menu\' to Aroma autoboot.");
