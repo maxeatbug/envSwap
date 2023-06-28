@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 		fputs("wiiu_menu", autobootcfg);
 		fclose(autobootcfg);
 
-	OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
+	OSLaunchTitlel(OS_TITLE_ID_REBOOT, 0);
 	while (WHBProcIsRunning()) {}
 	WHBProcShutdown();
 	return 0;
