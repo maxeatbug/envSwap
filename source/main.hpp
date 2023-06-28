@@ -1,5 +1,6 @@
 #include <coreinit/launch.h>
 #include <coreinit/screen.h>
+#include <coreinit/thread.h>
 #include <mocha/mocha.h>
 #include <string>
 #include <whb/log.h>

@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
 int exit()
 {
-	os_printf("Exiting in 5 seconds...");
+	os_printf("An error occured! Returning to menu in 5 seconds...");
 	OSSleepTicks(OSSecondsToTicks(5));
     WHBLogConsoleFree();
     WHBProcShutdown();
