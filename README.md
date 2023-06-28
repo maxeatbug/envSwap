@@ -9,7 +9,9 @@ This is a slightly overengineered app that just restarts your console and swaps 
 
 To build this, ensure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` installed via the (dkp-)pacman package manager. Run `make` in the same directory as the Makefile, and use the resulting files located in the `dist` directory.
 
-Alternatively, you can use the included dockerfile. a command like this should work for Linux: `docker run --rm -v ${PWD}:/project builder make`, or this for Windows `docker run --rm -v %cd%:/project builder make`.
+Alternatively, you can use the included dockerfile, here are some command that should work as long as you have Docker installed.
+Linux: `docker run --rm -v ${PWD}:/project builder make`
+Windows: `docker run --rm -v %cd%:/project builder make`.
 
 ## Credits
 Huge thanks to:
