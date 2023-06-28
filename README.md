@@ -1,8 +1,10 @@
-# Wii U Reboot
+# This is __NOT__ a port of HBL to aroma and __NOT__ an application to use ELF applications on Aroma.
+
+## Wii U Reboot
 
 This is a really simple app that just restarts your console. When used with things like the Aroma ftp plugin it's surprisingly convenient though :P
 
-## Building
+### Building
 
 To build this make sure you have `devkitPro`, `devkitPPC` and `wut` installed via the dkp-pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb.
 
