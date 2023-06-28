@@ -1,4 +1,4 @@
-![image](https://github.com/bigmaxine/EnvSwap/assets/128331670/42b7edb6-5e9c-44b8-9329-3de5feafcca0)
+![EnvSwap - Github Banner](https://github.com/bigmaxine/EnvSwap/assets/73800394/b63358b4-6e4d-4f35-a170-60b95dd52f21)
 # This is <ins>NOT</ins> a port of HBL to Aroma and <ins>NOT</ins> an application to use .ELF homebrew on Aroma.
 
 ## Wii U Environment Swapper
