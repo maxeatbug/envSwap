@@ -172,7 +172,7 @@ publish:
 	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap
 	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.rpx
 	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.wuhb
-	@7z a ../envswap.7z ../dist/wiiu
+	@zip ../envswap.zip ../dist/wiiu
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #-------------------------------------------------------------------------------
