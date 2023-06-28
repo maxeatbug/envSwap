@@ -14,9 +14,9 @@ To build this make sure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` 
 
 
 
-Credits: 
-maxine (me): project coordinator and development help
-[TraceEntertains](https://github.com/TraceEntertains) A lot of code just a wild amount of code
-[Ingunar](https://github.com/Ingunar) All of the things that look pretty are because of this guy
-[Moonlumen](https://github.com/Moonlumen) Moral support and insane amounts of alpha testing
-[WiiUReboot dev](https://github.com/Fangal-Airbag/WiiUReboot) Making an easy to read reboot app so I could understand WiiU Power Functions
+Credits: <br>
+maxine (me): project coordinator and development help <br>
+[TraceEntertains](https://github.com/TraceEntertains) A lot of code just a wild amount of code<br>
+[Ingunar](https://github.com/Ingunar) All of the things that look pretty are because of this guy<br>
+[Moonlumen](https://github.com/Moonlumen) Moral support and insane amounts of alpha testing<br>
+[WiiUReboot dev](https://github.com/Fangal-Airbag/WiiUReboot) Making an easy to read reboot app so I could understand WiiU Power Functions<br>
