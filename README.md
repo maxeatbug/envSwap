@@ -1,4 +1,4 @@
-# This is __NOT__ a port of HBL to aroma and __NOT__ an application to use ELF applications on Aroma.
+# This is <u>NOT</u> a port of HBL to aroma and <u>NOT</u> an application to use ELF applications on Aroma.
 
 ## Wii U Reboot
 
