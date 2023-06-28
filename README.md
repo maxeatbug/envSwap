@@ -1,11 +1,11 @@
-# This is NOT a port of HBL to aroma and NOT an application to use ELF applications on Aroma.
+# This is NOT a port of HBL to Aroma and NOT an application to use ELF applications on Aroma.
 
-## Wii U Reboot
+## Wii U Environment Swapper
 
-This is a really simple app that just restarts your console. When used with things like the Aroma ftp plugin it's surprisingly convenient though :P
+This is a really simple app that just restarts your console and swaps your environment. Makes life a lot easier when you need ELF homebrew though.
 
 ### Building
 
-To build this make sure you have `devkitPro`, `devkitPPC` and `wut` installed via the dkp-pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb.
+To build this make sure you have `devkitPro`, `devkitPPC` and `wut` installed via the (dkp-)pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb/rpx.
 
-**Special thanks to [Ingunar](https://github.com/Ingunar) for the icons!**
+**Special thanks to [Ingunar](https://github.com/Ingunar) for the icons/art!**
