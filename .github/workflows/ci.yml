@@ -17,5 +17,5 @@ jobs:
         docker run --rm -v ${PWD}:/project builder make
     - uses: actions/upload-artifact@master
       with:
-       name: zip
-       path: "*.zip"
+       name: envSwap
+       path: "./dist/wiiu"
