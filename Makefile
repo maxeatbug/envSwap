@@ -14,8 +14,8 @@ TOPDIR ?= $(CURDIR)
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
 APP_NAME		:= Reboot to Tiramisu
-APP_SHORTNAME	:= EnviSwap
-APP_AUTHOR		:= maxiine
+APP_SHORTNAME	        := EnvSwap
+APP_AUTHOR		:= maxiine, TraceEntertain
 
 include $(DEVKITPRO)/wut/share/wut_rules
 
@@ -30,15 +30,16 @@ include $(DEVKITPRO)/wut/share/wut_rules
 # TV_SPLASH is the image displayed during bootup on the TV, leave blank to use default rule
 # DRC_SPLASH is the image displayed during bootup on the DRC, leave blank to use default rule
 #-------------------------------------------------------------------------------
-TARGET		:=	EnviSwap
+DIST		:=	../dist
+TARGET		:=	EnvSwap
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
 CONTENT		:=
-ICON		:=  meta/icon.png
-TV_SPLASH	:=  meta/tv-splash.png
-DRC_SPLASH	:=  meta/drc-splash.png
+ICON		:=      meta/icon.png
+TV_SPLASH	:=      meta/tv-splash.png
+DRC_SPLASH	:=      meta/drc-splash.png
 
 #-------------------------------------------------------------------------------
 # options for code generation
@@ -53,13 +54,13 @@ CXXFLAGS	:= $(CFLAGS)
 ASFLAGS	:=	-g -Wint-conversion $(ARCH)
 LDFLAGS	=	-g -Wint-conversion $(ARCH) $(RPXSPECS) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lwut
+LIBS	:= 	-lwut -lmocha
 
 #-------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level
 # containing include and lib
 #-------------------------------------------------------------------------------
-LIBDIRS	:= $(PORTLIBS) $(WUT_ROOT)
+LIBDIRS	:= $(PORTLIBS) $(WUT_ROOT) $(WUT_ROOT)/usr
 
 #-------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -98,7 +99,7 @@ endif
 export OFILES_BIN	:=	$(addsuffix .o,$(BINFILES))
 export OFILES_SRC	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
 export OFILES 	:=	$(OFILES_BIN) $(OFILES_SRC)
-export HFILES_BIN	:=	$(addsuffix .h,$(subst .,_,$(BINFILES)))
+export HFILES_BIN	:=	$(addsuffix .h,$(subst .,_,$(BINFtainsILES)))
 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
@@ -157,14 +158,20 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #-------------------------------------------------------------------------------
 # main targets
 #-------------------------------------------------------------------------------
-all	:	$(OUTPUT).wuhb
+all	        :	$(OUTPUT).wuhb publish
 
 $(OUTPUT).wuhb	:	$(OUTPUT).rpx
 $(OUTPUT).rpx	:	$(OUTPUT).elf
 $(OUTPUT).elf	:	$(OFILES)
 
-$(OFILES_SRC)	: $(HFILES_BIN)
+$(OFILES_SRC)	:       $(HFILES_BIN)
 
+publish:
+	@rm -fr $(DIST)
+	@mkdir -p $(DIST)/wiiu/apps/EnvSwap
+	@cp ../meta_hbl/* $(DIST)/wiiu/apps/EnvSwap
+	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/EnvSwap/EnvSwap.rpx
+	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/EnvSwap/EnvSwap.wuhb
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #-------------------------------------------------------------------------------
