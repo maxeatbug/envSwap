@@ -22,6 +22,7 @@ int exit()
 	OSScreenFlipBuffers();
 	OSSleepTicks(OSSecondsToTicks(5));
     WHBLogConsoleFree();
+    while (WHBProcIsRunning()) {}
     WHBProcShutdown();
     return 0;
 }
