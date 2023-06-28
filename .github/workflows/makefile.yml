@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Docker CI
 
 on:
   push:
@@ -7,26 +7,15 @@ on:
     branches: [ "main" ]
     
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  build-binary:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up devkitPro
-        run: |
-          wget https://apt.devkitpro.org/install-devkitpro-pacman
-          chmod +x ./install-devkitpro-pacman
-          sudo ./install-devkitpro-pacman
-          sudo dkp-pacman -S --noconfirm devkitARM devkitPPC wut
-          ls /opt/devkitPro
-
-      - name: Set up libmocha
-        run: |
-          git clone https://github.com/wiiu-env/libmocha
-          cd libmocha
-          make install
-
-      - name: Build project
-        run: make
+    - uses: actions/checkout@v3
+    - name: Build Binary
+      run: |
+        docker build . -t builder
+        docker run --rm -v ${PWD}:/project builder make
+    - uses: actions/upload-artifact@master
+      with:
+       name: zip
+       path: "*.zip"
