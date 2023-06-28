@@ -8,4 +8,4 @@ This is a really simple app that just restarts your console and swaps your envir
 
 To build this make sure you have `devkitPro`, `devkitPPC` and `wut` installed via the (dkp-)pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb/rpx.
 
-**Special thanks to [Ingunar](https://github.com/Ingunar) for the icons/art and [Fangal-Airbag](https://github.com/Fangal-Airbag)'s [WiiUReboot](https://github.com/Fangal-Airbag/WiiUReboot) which was the basis of this project!**
+**Special thanks to [Ingunar](https://github.com/Ingunar) for the icons/art and [Fangal-Airbag](https://github.com/Fangal-Airbag)'s [WiiUReboot](https://github.com/Fangal-Airbag/WiiUReboot) which I originally used as a foundation**
