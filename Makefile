@@ -14,7 +14,7 @@ TOPDIR ?= $(CURDIR)
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
 APP_NAME		:= Reboot to Tiramisu
-APP_SHORTNAME	:= EnvSwap
+APP_SHORTNAME		:= EnvSwap
 APP_AUTHOR		:= maxiine, TraceEntertains
 
 include $(DEVKITPRO)/wut/share/wut_rules
@@ -30,7 +30,8 @@ include $(DEVKITPRO)/wut/share/wut_rules
 # TV_SPLASH is the image displayed during bootup on the TV, leave blank to use default rule
 # DRC_SPLASH is the image displayed during bootup on the DRC, leave blank to use default rule
 #-------------------------------------------------------------------------------
-DIST		:=	../dist
+DIST_NON_BUILD  :=      dist
+DIST		:=	../$(DIST_NON_BUILD)
 TARGET		:=	EnvSwap
 BUILD		:=	build
 SOURCES		:=	source
@@ -40,6 +41,7 @@ CONTENT		:=
 ICON		:=      meta/icon.png
 TV_SPLASH	:=      meta/tv-splash.png
 DRC_SPLASH	:=      meta/drc-splash.png
+VERSION         :=      1.0.1
 
 #-------------------------------------------------------------------------------
 # options for code generation
@@ -147,7 +149,7 @@ $(BUILD):
 #-------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).wuhb $(TARGET).rpx $(TARGET).elf
+	@rm -fr $(DIST_NON_BUILD) $(BUILD) $(TARGET).wuhb $(TARGET).rpx $(TARGET).elf $(TARGET)-$(VERSION).zip
 
 #-------------------------------------------------------------------------------
 else
@@ -172,7 +174,7 @@ publish:
 	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap
 	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.rpx
 	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.wuhb
-	@7z a -tzip ../envswap.zip ../dist/wiiu
+	@7z a -tzip ../$(TARGET)-$(VERSION).zip ../dist/wiiu
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #-------------------------------------------------------------------------------
