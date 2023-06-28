@@ -1,4 +1,4 @@
-# This is <u>NOT</u> a port of HBL to aroma and <u>NOT</u> an application to use ELF applications on Aroma.
+# This is NOT a port of HBL to aroma and NOT an application to use ELF applications on Aroma.
 
 ## Wii U Reboot
 
