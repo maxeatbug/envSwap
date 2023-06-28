@@ -1,10 +1,4 @@
-#include <coreinit/launch.h>
-#include <sysapp/launch.h>
-#include <whb/proc.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <coreinit/filesystem.h>
+#include "main.h"
 
 int main(int argc, char **argv)
 {
@@ -15,7 +9,7 @@ int main(int argc, char **argv)
 		fputs("wiiu_menu", autobootcfg);
 		fclose(autobootcfg);
 
-	OSLaunchTitlel(OS_TITLE_ID_REBOOT, 0);
+	OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
 	while (WHBProcIsRunning()) {}
 	WHBProcShutdown();
 	return 0;
