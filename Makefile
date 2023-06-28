@@ -14,7 +14,7 @@ TOPDIR ?= $(CURDIR)
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
 APP_NAME		:= Reboot to Tiramisu
-APP_SHORTNAME	        := EnvSwap
+APP_SHORTNAME	:= EnvSwap
 APP_AUTHOR		:= maxiine, TraceEntertains
 
 include $(DEVKITPRO)/wut/share/wut_rules
