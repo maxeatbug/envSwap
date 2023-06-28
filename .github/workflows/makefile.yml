@@ -5,23 +5,27 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: configure
-      run: ./configure
+      - name: Set up devkitPro
+        run: |
+          wget https://apt.devkitpro.org/install-devkitpro-pacman
+          chmod +x ./install-devkitpro-pacman
+          sudo ./install-devkitpro-pacman
+          sudo pacman -S --noconfirm devkitARM devkitPPC wut
 
-    - name: Install dependencies
-      run: make
+      - name: Set up libmocha
+        run: |
+          git clone https://github.com/wiiu-env/libmocha
+          cd libmocha
+          make install
 
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
+      - name: Build project
+        run: make
