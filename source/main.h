@@ -9,5 +9,5 @@
 // dont question it :)
 void OSLaunchTitle(uint64_t titleId, int argc)
 {
-        OSLaunchTitlel(titleID, argc);
+        OSLaunchTitlel(titleId, argc);
 }
