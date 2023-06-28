@@ -11,14 +11,14 @@ int main(int argc, char **argv)
 	bool finishedSuccessfully = false;
 
 	// wii u boilerplate start
-    WHBProcInit();
-    WHBLogConsoleInit();
-    WHBLogCafeInit();
+	WHBProcInit();
+	WHBLogConsoleInit();
+	WHBLogCafeInit();
 
-    if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
-        os_printf("Mocha_InitLibrary failed");
-        goto exit;
-    }
+	if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
+		os_printf("Mocha_InitLibrary failed");
+		goto exit;
+	}
 	// wii u boilerplate end
 
 	OSScreenClearBuffer(0);
@@ -108,5 +108,5 @@ exit:
 
 	WHBLogConsoleFree();
 	WHBProcShutdown();
-    return 0;
+	return 0;
 }
