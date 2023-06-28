@@ -13,8 +13,7 @@ int main(int argc, char **argv)
     }
 	// wii u boilerplate end
 
-	run_boot_change();
-	SYSLaunchMenu();
+	return run_boot_change();
 }
 
 int exit()
@@ -26,7 +25,7 @@ int exit()
     while (WHBProcIsRunning()) {}
     WHBProcShutdown();
     return 0;
-} 
+}
 
 int run_boot_change()
 {
