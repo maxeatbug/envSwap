@@ -1,6 +1,7 @@
 #include <coreinit/launch.h>
 #include <coreinit/screen.h>
 #include <coreinit/thread.h>
+#include <sysapp/launch.h>
 #include <mocha/mocha.h>
 #include <string>
 #include <unistd.h>

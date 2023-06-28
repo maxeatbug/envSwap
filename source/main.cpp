@@ -2,6 +2,12 @@
 
 int main(int argc, char **argv)
 {
+	bool isAroma;
+	std::string environment;
+	FILE *defaultcfg;
+	FILE *autobootcfg;
+	bool finishedSuccessfully = false;
+
 	// wii u boilerplate start
     WHBProcInit();
     WHBLogConsoleInit();
@@ -9,56 +15,39 @@ int main(int argc, char **argv)
 
     if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
         os_printf("Mocha_InitLibrary failed");
-        return exit();
+        goto exit;
     }
 	// wii u boilerplate end
 
-	return run_boot_change();
-}
-
-int exit()
-{
-	os_printf("An error occurred! Returning to menu in 5 seconds...");
-	OSScreenFlipBuffers();
-	OSSleepTicks(OSSecondsToTicks(5));
-    WHBLogConsoleFree();
-    while (WHBProcIsRunning()) {}
-    WHBProcShutdown();
-    return 0;
-}
-
-int run_boot_change()
-{
 	OSScreenClearBuffer(0);
 	
-	bool isAroma;
-	std::string environment = GetEnvironmentName();
+	environment = GetEnvironmentName();
 
 	if (environment.compare("legacy") == 0)
 	{
 		os_printf("Current Environment is Legacy or Unmodded,");
 		os_printf("use Tiramisu/Aroma for this application.");
-		return exit();
+		goto exit;
 	}
 	else if (environment.compare("aroma") == 0)
 	{
 		os_printf("Current Environment is Aroma, Swapping to Tiramisu.");
 		isAroma = true;
 		if (!CheckEnvironmentExist("tiramisu"))
-			return exit();
+			goto exit;
 	}
 	else if (environment.compare("tiramisu") == 0)
 	{
 		os_printf("Current Environment is Tiramisu, Swapping to Aroma.");
 		isAroma = false;
 		if (!CheckEnvironmentExist("aroma"))
-			return exit();
+			goto exit;
 	}
 	else 
 		isAroma = false; // avoid compiler note :P
 
 
-	FILE *defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
+	defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
 
 	if (isAroma)
 		fputs("tiramisu", defaultcfg);
@@ -67,9 +56,6 @@ int run_boot_change()
 
 	fclose(defaultcfg);	
 	
-
-	FILE *autobootcfg;
-
 	if (isAroma)
 	{
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg", "w");
@@ -85,14 +71,28 @@ int run_boot_change()
 
 	fclose(autobootcfg);
 
-
-	os_printf("Rebooting in 5 seconds!");
+	
+exit:
+	if (finishedSuccessfully)
+		os_printf("Rebooting in 5 seconds!");
+	else
+		os_printf("An error occurred! Exiting in 5 seconds...");
 	OSScreenFlipBuffers();
+
 	OSSleepTicks(OSSecondsToTicks(5));
 
-	OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
+	if (finishedSuccessfully)
+		OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
+	else
+	{
+		SYSLaunchMenu();
+	}
+
 	while (WHBProcIsRunning()) {}
-	WHBProcShutdown();
+	
+	Mocha_DeInitLibrary();
+
 	WHBLogConsoleFree();
-	return 0;
+	WHBProcShutdown();
+    return 0;
 }
