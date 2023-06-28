@@ -2,10 +2,12 @@
 
 int main(int argc, char **argv)
 {
-	bool isAroma;
 	std::string environment;
 	FILE *defaultcfg;
 	FILE *autobootcfg;
+	VPADStatus status;
+	VPADReadError err;
+	bool isAroma = true;
 	bool finishedSuccessfully = false;
 
 	// wii u boilerplate start
@@ -20,6 +22,8 @@ int main(int argc, char **argv)
 	// wii u boilerplate end
 
 	OSScreenClearBuffer(0);
+
+	VPADRead(VPAD_CHAN_0, &status, 1, &err);
 	
 	environment = GetEnvironmentName();
 
@@ -43,8 +47,6 @@ int main(int argc, char **argv)
 		if (!CheckEnvironmentExist("aroma"))
 			goto exit;
 	}
-	else 
-		isAroma = false; // avoid compiler note :P
 
 
 	defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
@@ -59,14 +61,23 @@ int main(int argc, char **argv)
 	if (isAroma)
 	{
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg", "w");
-		fputs("homebrew_launcher", autobootcfg);
-		os_printf("Writing \'homebrew_launcher\' to Tiramisu autoboot.");
+		if (status.hold & VPAD_BUTTON_B)
+		{
+			fputs("wiiu_menu", autobootcfg);
+			os_printf("Wrote \'wiiu_menu\' to Tiramisu autoboot.");
+		}
+		else
+		{
+			fputs("homebrew_launcher", autobootcfg);
+			os_printf("Wrote \'homebrew_launcher\' to Tiramisu autoboot.");
+		}
+		
 	}
 	else
 	{
 		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/aroma/autoboot.cfg", "w");
 		fputs("wiiu_menu", autobootcfg);
-		os_printf("Writing \'wiiu_menu\' to Aroma autoboot.");
+		os_printf("Wrote \'wiiu_menu\' to Aroma autoboot.");
 	}
 
 	fclose(autobootcfg);
@@ -74,16 +85,19 @@ int main(int argc, char **argv)
 	finishedSuccessfully = true;
 exit:
 	if (finishedSuccessfully)
-		os_printf("Rebooting in 5 seconds!");
-	else
-		os_printf("An error occurred! Exiting in 5 seconds...");
+		os_printf("Rebooting in 5 seconds...");
+	else if (isAroma)
+		os_printf("An error occurred! Exiting to menu in 5 seconds...");
+	else 
+		os_printf("An error occurred! Please press the HOME button to exit...");
 	OSScreenFlipBuffers();
 
-	OSSleepTicks(OSSecondsToTicks(5));
+	if (isAroma || finishedSuccessfully)
+		OSSleepTicks(OSSecondsToTicks(5));
 
 	if (finishedSuccessfully)
 		OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
-	else
+	else if (isAroma)
 	{
 		SYSLaunchMenu();
 	}

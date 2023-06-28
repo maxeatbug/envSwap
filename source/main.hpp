@@ -2,6 +2,7 @@
 #include <coreinit/screen.h>
 #include <coreinit/thread.h>
 #include <sysapp/launch.h>
+#include <vpad/input.h>
 #include <mocha/mocha.h>
 #include <string>
 #include <unistd.h>
