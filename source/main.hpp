@@ -11,9 +11,6 @@
 #include <whb/log_console.h>
 #include <whb/proc.h>
 
-int run_boot_change();
-int exit();
-
 int lineNumber = 0;
 
 #define OSScreenPutFont(row, column, buffer) ({ \
