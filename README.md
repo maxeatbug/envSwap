@@ -1,4 +1,4 @@
-# This is NOT a port of HBL to Aroma and NOT an application to use ELF applications on Aroma.
+# This is <ins>NOT</ins> a port of HBL to Aroma and NOT an application to use ELF applications on Aroma.
 
 ## Wii U Environment Swapper
 
