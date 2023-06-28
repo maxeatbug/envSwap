@@ -10,4 +10,13 @@ by the way if you want to build for ELF format the option is there it's just tha
 
 To build this make sure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` installed via the (dkp-)pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb/rpx.
 
-**Special thanks to [Ingunar](https://github.com/Ingunar) for the icons/art and [Fangal-Airbag](https://github.com/Fangal-Airbag)'s [WiiUReboot](https://github.com/Fangal-Airbag/WiiUReboot) which I originally used as a foundation**
+**Special thanks to  for the icons/art and [Fangal-Airbag](https://github.com/Fangal-Airbag)'s [WiiUReboot](https://github.com/Fangal-Airbag/WiiUReboot) which I originally used as a foundation**
+
+
+
+Credits: <br>
+maxine (me) - project coordinator and development help <br>
+[TraceEntertains](https://github.com/TraceEntertains) - A lot of code. Just... a wild amount of code.<br>
+[Ingunar](https://github.com/Ingunar) - All of the things that look pretty are because of this guy.<br>
+[Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing.<br>
+[WiiUReboot dev](https://github.com/Fangal-Airbag/WiiUReboot) - Making an easy to read reboot app so I could understand WiiU Power Functions.<br>
