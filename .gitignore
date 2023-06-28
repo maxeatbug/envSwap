@@ -4,3 +4,4 @@ build
 *.rpx
 *.wuhb
 dist
+ *.7z
