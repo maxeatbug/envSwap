@@ -3,7 +3,13 @@
 
 ## Wii U Environment Swapper
 
-This is a slightly overengineered app that just restarts your console and swaps the environment, with the purpose of running Tiramisu applications easier instead of rebooting your console manually, holding X and then doing all of the EnvironmentLoader stuff manually. To boot into the Homebrew Launcher when switching from Aroma to Tiramisu, hold B while running Reboot to Tiramisu.
+This is a slightly overengineered app that just restarts your console and swaps the environment, with the purpose of running Tiramisu applications easier instead of rebooting your console manually, holding X and then doing all of the EnvironmentLoader stuff manually.<br>
+
+Opening the app in Tiramisu (input changes nothing) reboots to Aroma’s Wii U Home Menu<br>
+
+Opening the app in Aroma with no buttons pressed reboots Tiramisu’s HBL<br>
+
+Opening the app in Aroma with the B button pressed reboots Tiramisu’s Wii U Menu<br>
 
 ## Building
 
