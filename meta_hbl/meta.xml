@@ -4,7 +4,7 @@
 	<coder>EnvSwap Squad</coder>
 	<version>0.3</version>
 	<release_date>20230628120000</release_date>
-	<short_description>EnvSwap -  Reboots to the Aroma System Menu</short_description>
+	<short_description>EnvSwap - Reboots to the Aroma System Menu</short_description>
 	<long_description>Swaps between the Aroma and Tiramisu environments for people who need to use ELF homebrew or need to use HBL apps.</long_description>
 	<category>Misc</category>
 	<url>https://github.com/bigmaxine/EnvSwap/</url>
