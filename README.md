@@ -15,7 +15,7 @@ To build this make sure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` 
 
 
 Credits: <br>
-maxine (me): project coordinator and development help <br>
+maxine (me) - project coordinator and development help <br>
 [TraceEntertains](https://github.com/TraceEntertains) - A lot of code. Just... a wild amount of code.<br>
 [Ingunar](https://github.com/Ingunar) - All of the things that look pretty are because of this guy.<br>
 [Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing.<br>
