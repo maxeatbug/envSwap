@@ -2,7 +2,9 @@
 
 ## Wii U Environment Swapper
 
-This is a really simple app that just restarts your console and swaps your environment. Makes life a lot easier when you need ELF homebrew though.
+This is a really NOT SO simple app that just restarts your console and swaps your environment. Makes life a lot easier when you need ELF homebrew though, this ended up being much more of an undertaking for the devs than we anticipated so round of applause to maxine and ESPECIALLY Trace who singlehandedly got all of the extra features working and greatly improved on the parity of the RPX/WUHB versions.
+
+by the way if you want to build for ELF format the option is there it's just that why the hell would you use a .ELF file ever again.
 
 ### Building
 
