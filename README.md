@@ -2,21 +2,17 @@
 
 ## Wii U Environment Swapper
 
-This is a really NOT SO simple app that just restarts your console and swaps your environment. Makes life a lot easier when you need ELF homebrew though, this ended up being much more of an undertaking for the devs than we anticipated so round of applause to maxine and ESPECIALLY Trace who singlehandedly got all of the extra features working and greatly improved on the parity of the RPX/WUHB versions.
+This is a slightly overengineered app that just restarts your console and swaps the environment, with the purpose of running Tiramisu applications easier instead of rebooting your console manually, holding X and then doing all of the EnvironmentLoader stuff manually. To boot into the Homebrew Launcher when switching from Aroma to Tiramisu, hold B while running Reboot to Tiramisu.
 
-by the way if you want to build for ELF format the option is there it's just that why the hell would you use a .ELF file ever again.
+## Building
 
-### Building
+To build this, ensure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` installed via the (dkp-)pacman package manager. Run `make` in the same directory as the Makefile, and use the resulting files located in the `dist` directory.
 
-To build this make sure you have `devkitPro`, `devkitPPC`, `libmocha` and `wut` installed via the (dkp-)pacman package manager. Then just run `make` in the same directory as the Makefile and use the resulting wuhb/rpx.
+## Credits
+Huge thanks to:
 
-**Special thanks to  for the icons/art and [Fangal-Airbag](https://github.com/Fangal-Airbag)'s [WiiUReboot](https://github.com/Fangal-Airbag/WiiUReboot) which I originally used as a foundation**
-
-
-
-Credits: <br>
-maxine (me) - project coordinator and development help <br>
-[TraceEntertains](https://github.com/TraceEntertains) - A lot of code. Just... a wild amount of code.<br>
-[Ingunar](https://github.com/Ingunar) - All of the things that look pretty are because of this guy.<br>
-[Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing.<br>
-[WiiUReboot dev](https://github.com/Fangal-Airbag/WiiUReboot) - Making an easy to read reboot app so I could understand WiiU Power Functions.<br>
+[Maxine](https://github.com/bigmaxine) - Project coordinator, programming and development help <br>
+[TraceEntertains](https://github.com/TraceEntertains) - A lot of code. Just... a wild amount of code<br>
+[Ingunar](https://github.com/Ingunar) - All of the awesome icons & graphics<br>
+[Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing<br>
+[WiiUReboot](https://github.com/Fangal-Airbag/) - Originally used as a foundation for this project<br>
