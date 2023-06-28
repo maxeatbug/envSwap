@@ -3,6 +3,7 @@
 #include <coreinit/thread.h>
 #include <mocha/mocha.h>
 #include <string>
+#include <unistd.h>
 #include <whb/log.h>
 #include <whb/log_cafe.h>
 #include <whb/log_console.h>
@@ -12,7 +13,6 @@ int run_boot_change();
 int exit();
 
 int lineNumber = 0;
-int gClient = -1;
 
 #define OSScreenPutFont(row, column, buffer) ({ \
     OSScreenPutFontEx(SCREEN_TV, row, column, buffer); \
@@ -65,7 +65,7 @@ std::string GetEnvironmentName()
         return "legacy";
 }
 
-std::string FixPathForFSA(std::string path)
+/*std::string FixPathForFSA(std::string path)
 {
     std::string prefix = "fs:/vol";
     std::string replacement = "/vol";
@@ -75,24 +75,24 @@ std::string FixPathForFSA(std::string path)
     }
     
     return path;
-}
+}*/
 
 bool CheckFolderExist(std::string path) {
-    FSADirectoryHandle handle = -1;
-    path = FixPathForFSA(path);
+    //std::string path2 = FixPathForFSA(path);
     char* pathChars = new char[path.size() + 1];
     std::copy(path.begin(), path.end(), pathChars);
-    if (FSAOpenDir(gClient, pathChars, &handle) != FS_ERROR_OK) {
-        return false;
+    
+    if (access(pathChars, F_OK) == 0) {
+        return true;
     }
 
-    FSACloseDir(gClient, handle);
-    return true;
+    return false;
 }
 
 bool CheckEnvironmentExist(std::string environmentName)
 {
     if (CheckFolderExist(DEFAULT_ENVIRONMENT_SD_PATH + environmentName))
         return true;
+    os_printf("The environment you are trying to switch to doesn't exist!");
     return false;
 }

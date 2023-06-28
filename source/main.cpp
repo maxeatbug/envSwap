@@ -11,18 +11,6 @@ int main(int argc, char **argv)
         os_printf("Mocha_InitLibrary failed");
         return exit();
     }
-
-    FSAInit();
-    gClient = FSAAddClient(NULL);
-    if (gClient == 0) {
-        os_printf("Failed to add FSAClient");
-        return exit();
-    }
-    if (Mocha_UnlockFSClientEx(gClient) != MOCHA_RESULT_SUCCESS) {
-        FSADelClient(gClient);
-        os_printf("Failed to add FSAClient");
-        return exit();
-    }
 	// wii u boilerplate end
 
 	return run_boot_change();
@@ -47,7 +35,8 @@ int run_boot_change()
 
 	if (environment.compare("legacy") == 0)
 	{
-		os_printf("Current Environment is Legacy or Unmodded, please use Tiramisu/Aroma for this application.");
+		os_printf("Current Environment is Legacy or Unmodded,");
+		os_printf("use Tiramisu/Aroma for this application.");
 		return exit();
 	}
 	else if (environment.compare("aroma") == 0)
