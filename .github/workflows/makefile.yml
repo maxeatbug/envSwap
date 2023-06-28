@@ -19,7 +19,7 @@ jobs:
           wget https://apt.devkitpro.org/install-devkitpro-pacman
           chmod +x ./install-devkitpro-pacman
           sudo ./install-devkitpro-pacman
-          sudo pacman -S --noconfirm devkitARM devkitPPC wut
+          sudo dkp-pacman -S --noconfirm devkitARM devkitPPC wut
 
       - name: Set up libmocha
         run: |
