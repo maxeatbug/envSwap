@@ -10,7 +10,6 @@
 int run_boot_change();
 int exit();
 
-int gClient = -1;
 int lineNumber = 0;
 
 #define OSScreenPutFont(row, column, buffer) ({ \
@@ -50,14 +49,14 @@ const std::string GetEnvironmentName()
     char environmentPathBuffer[0x100];
     MochaUtilsStatus status;
     if ((status = Mocha_GetEnvironmentPath(environmentPathBuffer, sizeof(environmentPathBuffer))) != MOCHA_RESULT_SUCCESS)
-        return {};
+        return "legacy";
 
     std::string envPathString(environmentPathBuffer);
   
     if (envPathString.compare(DEFAULT_AROMA_ENVIRONMENT_SD_PATH) == 0)
         return "aroma";
-    if (envPathString.compare(DEFAULT_TIRAMISU_ENVIRONMENT_SD_PATH) == 0)
+    else if (envPathString.compare(DEFAULT_TIRAMISU_ENVIRONMENT_SD_PATH) == 0)
         return "tiramisu";
-
-    return "";
+    else
+        return "legacy";
 }

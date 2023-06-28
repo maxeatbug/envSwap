@@ -10,35 +10,18 @@ int main(int argc, char **argv)
     if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
         WHBLogPrintf("Mocha_InitLibrary failed");
         WHBLogConsoleDraw();
-        OSSleepTicks(OSMillisecondsToTicks(3000));
         return exit();
     }
-
-
-    FSAInit();
-    gClient = FSAAddClient(NULL);
-    if (gClient == 0) {
-        WHBLogPrintf("Failed to add FSAClient");
-        WHBLogConsoleDraw();
-        OSSleepTicks(OSMillisecondsToTicks(3000));
-        return exit();
-    }
-    if (Mocha_UnlockFSClientEx(gClient) != MOCHA_RESULT_SUCCESS) {
-        FSADelClient(gClient);
-        WHBLogPrintf("Failed to add FSAClient");
-        WHBLogConsoleDraw();
-        OSSleepTicks(OSMillisecondsToTicks(3000));
-        return exit();
-    }
-
 	// wii u boilerplate end
 
-	run_boot_change();
+	return run_boot_change();
 	exit();
 }
 
 int exit()
 {
+	os_printf("Exiting in 5 seconds...");
+	OSSleepTicks(OSSecondsToTicks(5));
     WHBLogConsoleFree();
     WHBProcShutdown();
     return 0;
@@ -48,14 +31,27 @@ int run_boot_change()
 {
 	OSScreenClearBuffer(0);
 	
-	bool isAroma = true;
+	bool isAroma;
 	std::string environment = GetEnvironmentName();
-	if (environment.compare("tiramisu") == 0)
+
+	if (environment.compare("legacy") == 0)
 	{
-		os_printf("Current Environment is Tiramisu, Swapping to Aroma");
+		os_printf("Current Environment is Legacy or Unmodded, please use Tiramisu/Aroma for this application.");
+		return exit();
+	}
+	else if (environment.compare("aroma") == 0)
+	{
+		os_printf("Current Environment is Aroma, Swapping to Tiramisu.");
+		isAroma = true;
+	}
+	else if (environment.compare("tiramisu") == 0)
+	{
+		os_printf("Current Environment is Tiramisu, Swapping to Aroma.");
 		isAroma = false;
 	}
-  
+	else 
+		isAroma = false; // avoid compiler note :)
+
 
 	FILE *defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
 
@@ -84,13 +80,14 @@ int run_boot_change()
 
 	fclose(autobootcfg);
 
-	os_printf("Rebooting in 5 Seconds!");
+
+	os_printf("Rebooting in 5 seconds!");
 	OSScreenFlipBuffers();
 	OSSleepTicks(OSSecondsToTicks(5));
-	
 
 	OSLaunchTitle(OS_TITLE_ID_REBOOT, 0);
 	while (WHBProcIsRunning()) {}
 	WHBProcShutdown();
+	WHBLogConsoleFree();
 	return 0;
 }

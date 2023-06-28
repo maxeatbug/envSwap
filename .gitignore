@@ -2,6 +2,7 @@
 build
 dist
 
+*.lst
 *.elf
 *.rpx
 *.wuhb
