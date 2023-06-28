@@ -48,7 +48,7 @@ void OSLaunchTitle(uint64_t titleId, int argc)
     OSLaunchTitlel(titleId, argc);
 }
 
-const std::string GetEnvironmentName()
+std::string GetEnvironmentName()
 {
     char environmentPathBuffer[0x100];
     MochaUtilsStatus status;
