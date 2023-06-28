@@ -15,7 +15,7 @@ TOPDIR ?= $(CURDIR)
 #-------------------------------------------------------------------------------
 APP_NAME		:= Reboot to Tiramisu
 APP_SHORTNAME	        := EnvSwap
-APP_AUTHOR		:= maxiine, TraceEntertain
+APP_AUTHOR		:= maxiine, TraceEntertains
 
 include $(DEVKITPRO)/wut/share/wut_rules
 
@@ -99,7 +99,7 @@ endif
 export OFILES_BIN	:=	$(addsuffix .o,$(BINFILES))
 export OFILES_SRC	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
 export OFILES 	:=	$(OFILES_BIN) $(OFILES_SRC)
-export HFILES_BIN	:=	$(addsuffix .h,$(subst .,_,$(BINFtainsILES)))
+export HFILES_BIN	:=	$(addsuffix .h,$(subst .,_,$(BINFILES)))
 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
