@@ -18,14 +18,12 @@ int main(int argc, char **argv)
     if (gClient == 0) {
         WHBLogPrintf("Failed to add FSAClient");
         WHBLogConsoleDraw();
-        OSSleepTicks(OSMillisecondsToTicks(3000));
         return exit();
     }
     if (Mocha_UnlockFSClientEx(gClient) != MOCHA_RESULT_SUCCESS) {
         FSADelClient(gClient);
         WHBLogPrintf("Failed to add FSAClient");
         WHBLogConsoleDraw();
-        OSSleepTicks(OSMillisecondsToTicks(3000));
         return exit();
     }
 	// wii u boilerplate end
