@@ -65,13 +65,6 @@ std::string GetEnvironmentName()
         return "legacy";
 }
 
-bool CheckEnvironmentExist(std::string environmentName)
-{
-    if (CheckFolderExist(DEFAULT_ENVIRONMENT_SD_PATH + environmentName))
-        return true;
-    return false;
-}
-
 bool CheckFolderExist(std::string path) {
     FSADirectoryHandle handle = -1;
     char* pathChars = new char[path.size() + 1];
@@ -82,4 +75,11 @@ bool CheckFolderExist(std::string path) {
 
     FSACloseDir(gClient, handle);
     return true;
+}
+
+bool CheckEnvironmentExist(std::string environmentName)
+{
+    if (CheckFolderExist(DEFAULT_ENVIRONMENT_SD_PATH + environmentName))
+        return true;
+    return false;
 }
