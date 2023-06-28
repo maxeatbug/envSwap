@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
 	fclose(autobootcfg);
 
-	
+	finishedSuccessfully = true;
 exit:
 	if (finishedSuccessfully)
 		os_printf("Rebooting in 5 seconds!");
