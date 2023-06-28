@@ -20,6 +20,7 @@ jobs:
           chmod +x ./install-devkitpro-pacman
           sudo ./install-devkitpro-pacman
           sudo dkp-pacman -S --noconfirm devkitARM devkitPPC wut
+          ls /opt/devkitPro
 
       - name: Set up libmocha
         run: |
