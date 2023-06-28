@@ -1,5 +1,5 @@
 ![image](https://github.com/bigmaxine/EnvSwap/assets/128331670/42b7edb6-5e9c-44b8-9329-3de5feafcca0)
-# This is <ins>NOT</ins> a port of HBL to Aroma and <ins>NOT</ins> an application to use ELF applications on Aroma.
+# This is <ins>NOT</ins> a port of HBL to Aroma and <ins>NOT</ins> an application to use .ELF homebrew on Aroma.
 
 ## Wii U Environment Swapper
 
@@ -21,7 +21,7 @@ Huge thanks to:
 
 [Maxine](https://github.com/bigmaxine) - Project coordinator, programming and development help <br>
 [TraceEntertains](https://github.com/TraceEntertains) - A lot of code. Just... a wild amount of code<br>
-[Ingunar](https://github.com/Ingunar) - All of the awesome icons & graphics<br>
+[Ingunar](https://github.com/Ingunar) - All of the awesome icons & graphics (and the idea for this too)<br>
 [Moonlumen](https://github.com/Moonlumen) - Moral support and *insane* amounts of alpha testing<br>
 [WiiUReboot](https://github.com/Fangal-Airbag/) - Originally used as a foundation for this project<br>
 
