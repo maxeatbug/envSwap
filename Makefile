@@ -44,10 +44,10 @@ DRC_SPLASH	:=      meta/drc-splash.png
 #-------------------------------------------------------------------------------
 # options for code generation
 #-------------------------------------------------------------------------------
-CFLAGS	:=	-g -Wall -O2 -ffunction-sections -Wint-conversion\
+CFLAGS	:=	-g -Wall -O2 -ffunction-sections\
 			$(MACHDEP)
 
-CFLAGS	+=	$(INCLUDE) -D__WIIU__ -D__WUT__ -Wint-conversion
+CFLAGS	+=	$(INCLUDE) -D__WIIU__ -D__WUT__ 
 
 CXXFLAGS	:= $(CFLAGS)
 
@@ -168,10 +168,10 @@ $(OFILES_SRC)	:       $(HFILES_BIN)
 
 publish:
 	@rm -fr $(DIST)
-	@mkdir -p $(DIST)/wiiu/apps/EnvSwap
-	@cp ../meta_hbl/* $(DIST)/wiiu/apps/EnvSwap
-	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/EnvSwap/EnvSwap.rpx
-	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/EnvSwap/EnvSwap.wuhb
+	@mkdir -p $(DIST)/wiiu/apps/_EnvSwap
+	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap
+	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.rpx
+	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.wuhb
 	@7z a ../envswap.7z ../dist/wiiu
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data

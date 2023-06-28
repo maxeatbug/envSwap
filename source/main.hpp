@@ -1,11 +1,36 @@
 #include <coreinit/launch.h>
-#include <sysapp/launch.h>
-#include <whb/proc.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <coreinit/filesystem.h>
+#include <coreinit/screen.h>
 #include <mocha/mocha.h>
+#include <string>
+#include <whb/log.h>
+#include <whb/log_cafe.h>
+#include <whb/log_console.h>
+#include <whb/proc.h>
+
+int run_boot_change();
+int exit();
+
+static int lineNumber = 0;
+
+#define OSScreenPutFont(row, column, buffer) ({ \
+    OSScreenPutFontEx(SCREEN_TV, row, column, buffer); \
+    OSScreenPutFontEx(SCREEN_DRC, row, column, buffer); \
+})
+
+#define OSScreenClearBuffer(color) ({ \
+    OSScreenClearBufferEx(SCREEN_TV, color); \
+    OSScreenClearBufferEx(SCREEN_DRC, color); \
+})
+
+#define OSScreenFlipBuffers() ({ \
+    OSScreenFlipBuffersEx(SCREEN_TV); \
+    OSScreenFlipBuffersEx(SCREEN_DRC); \
+})
+
+#define os_printf(text) ({ \
+    OSScreenPutFont(0, lineNumber, text); \
+    lineNumber++; \
+})
 
 #define SD_PATH                                "fs:/vol/external01/"
 #define DEFAULT_AROMA_ENVIRONMENT_PATH         "wiiu/environments/aroma"

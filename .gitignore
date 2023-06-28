@@ -1,7 +1,8 @@
 .vscode
 build
+dist
+
 *.elf
 *.rpx
 *.wuhb
-dist
 *.7z
