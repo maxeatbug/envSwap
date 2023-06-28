@@ -24,7 +24,7 @@ const std::string GetEnvironmentName()
     char environmentPathBuffer[0x100];
     MochaUtilsStatus status;
     if ((status = Mocha_GetEnvironmentPath(environmentPathBuffer, sizeof(environmentPathBuffer))) != MOCHA_RESULT_SUCCESS)
-        return "";
+        return {};
 
     std::string envPathString(environmentPathBuffer);
   
