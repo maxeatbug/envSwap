@@ -1,7 +1,6 @@
 #include <coreinit/launch.h>
 #include <coreinit/screen.h>
 #include <coreinit/thread.h>
-#include <sysapp/launch.h>
 #include <mocha/mocha.h>
 #include <string>
 #include <unistd.h>
@@ -44,7 +43,7 @@ int lineNumber = 0;
 #define DEFAULT_TIRAMISU_ENVIRONMENT_SD_PATH   SD_PATH DEFAULT_TIRAMISU_ENVIRONMENT_PATH
 
 // dont question it :)
-void OSLaunchTitle(uint64_t  titleId, int argc)
+void OSLaunchTitle(uint64_t titleId, int argc)
 {
     OSLaunchTitlel(titleId, argc);
 }
@@ -78,7 +77,8 @@ std::string GetEnvironmentName()
     return path;
 }*/
 
-bool CheckFolderExist(std::string path) {
+bool CheckFolderExist(std::string path)
+{
     //std::string path2 = FixPathForFSA(path);
     char* pathChars = new char[path.size() + 1];
     std::copy(path.begin(), path.end(), pathChars);
