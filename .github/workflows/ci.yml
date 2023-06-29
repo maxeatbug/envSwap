@@ -19,9 +19,9 @@ jobs:
         touch $DEVKITPRO/wut/share/wut_rules
         docker build . -t builder
         docker run --rm -v ${PWD}:/project builder make
-        export VERSION=$(make get_version)
-        echo Version is $VERSION
+        echo "VERSION=$(make get_version)" >> $GITHUB_ENV
+        echo Version is ${{ env.VERSION }}
     - uses: actions/upload-artifact@v3
       with:
-        name: EnvSwap-${{ vars.VERSION }}
-        path: "./EnvSwap-${{ vars.VERSION }}.zip"
+        name: EnvSwap-${{ env.VERSION }}
+        path: "./EnvSwap-${{ env.VERSION }}.zip"
