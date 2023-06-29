@@ -41,7 +41,7 @@ CONTENT		:=
 ICON		:=      meta/icon.png
 TV_SPLASH	:=      meta/tv-splash.png
 DRC_SPLASH	:=      meta/drc-splash.png
-VERSION         :=      1.0.1
+VERSION         :=      1.0.2
 
 #-------------------------------------------------------------------------------
 # options for code generation
