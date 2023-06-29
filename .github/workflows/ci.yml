@@ -17,8 +17,8 @@ jobs:
         docker build . -t builder
         docker run --rm -v ${PWD}:/project builder make
         export VERSION=$(make get_version)
-    - name: Publish
     - uses: actions/upload-artifact@v3
+    - name: Publish
       with:
         name: EnvSwap-${{ env.VERSION }}
         path: "./EnvSwap-${{ env.VERSION }}.zip"
