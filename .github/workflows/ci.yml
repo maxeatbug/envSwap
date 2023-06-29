@@ -14,10 +14,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build Binary
       run: |
+        # set devkitpro to throwaway variable just so make 'get_version' doesnt complain
+        export DEVKITPRO=/opt
         docker build . -t builder
         docker run --rm -v ${PWD}:/project builder make
         export VERSION=$(make get_version)
     - uses: actions/upload-artifact@v3
       with:
-        name: EnvSwap-${{ vars.VERSION }}
-        path: "./EnvSwap-${{ vars.VERSION }}.zip"
+        name: EnvSwap-${{ env.VERSION }}
+        path: "./EnvSwap-${{ env.VERSION }}.zip"

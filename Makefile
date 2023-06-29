@@ -2,11 +2,6 @@
 .SUFFIXES:
 #-------------------------------------------------------------------------------
 
-get_version:
-	@echo $(VERSION)
-
-#-------------------------------------------------------------------------------
-
 ifeq ($(strip $(DEVKITPRO)),)
 $(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>/devkitpro")
 endif
@@ -153,9 +148,15 @@ $(BUILD):
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #-------------------------------------------------------------------------------
+
 clean:
 	@echo clean ...
 	@rm -fr $(DIST_NON_BUILD) $(BUILD) $(TARGET).wuhb $(TARGET).rpx $(TARGET).elf $(TARGET)-$(VERSION).zip
+
+#-------------------------------------------------------------------------------
+
+get_version:
+	@echo $(VERSION)
 
 #-------------------------------------------------------------------------------
 
@@ -187,7 +188,7 @@ publish:
 	@sed -i 's/{{VERSION}}/$(VERSION)/g' $(DIST)/wiiu/apps/_EnvSwap/meta.xml
 # zip to file
 	@7z a -tzip ../$(TARGET)-$(VERSION).zip ../dist/wiiu
-	
+
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #-------------------------------------------------------------------------------
