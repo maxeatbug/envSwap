@@ -2,6 +2,11 @@
 .SUFFIXES:
 #-------------------------------------------------------------------------------
 
+get_version:
+	@echo $(VERSION)
+
+#-------------------------------------------------------------------------------
+
 ifeq ($(strip $(DEVKITPRO)),)
 $(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>/devkitpro")
 endif
@@ -151,11 +156,6 @@ $(BUILD):
 clean:
 	@echo clean ...
 	@rm -fr $(DIST_NON_BUILD) $(BUILD) $(TARGET).wuhb $(TARGET).rpx $(TARGET).elf $(TARGET)-$(VERSION).zip
-
-#-------------------------------------------------------------------------------
-
-get_version:
-	@echo $(VERSION)
 
 #-------------------------------------------------------------------------------
 
