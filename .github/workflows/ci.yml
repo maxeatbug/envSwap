@@ -17,7 +17,7 @@ jobs:
         # set devkitpro to throwaway variable just so make 'get_version' doesnt complain
         export DEVKITPRO=/opt/devkitPro
         # jk, not throwaway, now to trick it into including wut_rules
-        mkdir $DEVKITPRO/wut/share/
+        mkdir -p $DEVKITPRO/wut/share/
         touch $DEVKITPRO/wut/share/wut_rules
         # hope it works
         docker build . -t builder
