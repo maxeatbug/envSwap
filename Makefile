@@ -137,9 +137,10 @@ else ifneq (,$(wildcard $(TOPDIR)/splash.png))
 	export APP_DRC_SPLASH := $(TOPDIR)/splash.png
 endif
 
-.PHONY: $(BUILD) clean all
+.PHONY: all $(BUILD) clean get_version
 
 #-------------------------------------------------------------------------------
+
 all: $(BUILD)
 
 $(BUILD):
@@ -152,6 +153,12 @@ clean:
 	@rm -fr $(DIST_NON_BUILD) $(BUILD) $(TARGET).wuhb $(TARGET).rpx $(TARGET).elf $(TARGET)-$(VERSION).zip
 
 #-------------------------------------------------------------------------------
+
+get_version:
+	@echo $(VERSION)
+
+#-------------------------------------------------------------------------------
+
 else
 .PHONY:	all
 
@@ -169,12 +176,18 @@ $(OUTPUT).elf	:	$(OFILES)
 $(OFILES_SRC)	:       $(HFILES_BIN)
 
 publish:
+# setup dist
 	@rm -fr $(DIST)
 	@mkdir -p $(DIST)/wiiu/apps/_EnvSwap
-	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap
+# copy files
+	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap 
 	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.rpx
 	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.wuhb
+# set version
+	@sed -i 's/{{VERSION}}/$(VERSION)/g' $(DIST)/wiiu/apps/_EnvSwap/meta.xml
+# zip to file
 	@7z a -tzip ../$(TARGET)-$(VERSION).zip ../dist/wiiu
+	
 #-------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #-------------------------------------------------------------------------------
