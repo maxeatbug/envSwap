@@ -23,5 +23,5 @@ jobs:
         echo Version is $VERSION
     - uses: actions/upload-artifact@v3
       with:
-        name: EnvSwap-${{ env.VERSION }}
-        path: "./EnvSwap-${{ env.VERSION }}.zip"
+        name: EnvSwap-${{ vars.VERSION }}
+        path: "./EnvSwap-${{ vars.VERSION }}.zip"
