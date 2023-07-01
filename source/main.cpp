@@ -1,13 +1,18 @@
-#include "main.hpp"
+#include "common.hpp"
+#include "StringUtils.hpp"
+#include "Environment.hpp"
+#include "PrintingHelpers.hpp"
 
 int main(int argc, char **argv)
 {
 	std::string environment;
+	std::string oppositeEnvironment;
 	FILE *defaultcfg;
 	FILE *autobootcfg;
 	VPADStatus status;
 	VPADReadError err;
-	bool isAroma = true;
+	const char *autobootName;
+	bool isAroma = false;
 	bool finishedSuccessfully = false;
 
 	// wii u boilerplate start
@@ -16,96 +21,87 @@ int main(int argc, char **argv)
 	WHBLogCafeInit();
 
 	if (Mocha_InitLibrary() != MOCHA_RESULT_SUCCESS) {
-		OS_Print("Mocha_InitLibrary failed");
+		PrintingHelpers::OS_Print("Mocha_InitLibrary failed");
 		goto exit;
 	}
 	// wii u boilerplate end
 
-	OSScreenClearBuffer(0);
+	PrintingHelpers::OSScreenClearBuffer(0);
+	PrintingHelpers::OS_PrintBlankLine();
 
 	VPADRead(VPAD_CHAN_0, &status, 1, &err);
 	
-	environment = GetEnvironmentName();
-	OS_Print("Checking Environment...");
-	OS_PrintBlankLine();
+	environment = Environment::GetEnvironmentName();
+	oppositeEnvironment = Environment::GetOppositeEnvironmentName(environment);
+	PrintingHelpers::OS_PrintToLog("Checking environment...");
+	PrintingHelpers::OS_PrintBlankLine();
 
 	// environment checking
-	if (environment.compare("legacy") == 0)
+	if (environment.compare("legacy") != 0) // string.compare("string2") == 0 basically just returns true if they are the same
 	{
-		isAroma = false;
-		OS_Print("The current environment is legacy or unmodded, please use   Tiramisu/Aroma for this application."); // whitespace for proper wrapping
+		// extra whitespace in string for proper wrapping
+		PrintingHelpers::OS_Print(StringUtils::Format("The current environment is legacy or unmodded, please use   {} and {} for this application.",
+			StringUtils::FirstToUpper(oppositeEnvironment),
+			StringUtils::FirstToUpper(StringUtils::ToString(Environment::GetOppositeEnvironmentName(oppositeEnvironment)))).c_str()); // get the opposite of the opposite, fallback of opposite is tiramisu, opposite of tiramisu is aroma, so you get tiramisu and aroma
 		goto exit;
 	}
 	else if (environment.compare("aroma") == 0)
-	{
 		isAroma = true;
-		OS_Print("The current environment is Aroma, swapping to Tiramisu.");
-		if (!CheckEnvironmentExist("tiramisu"))
-			goto exit;
-	}
-	else if (environment.compare("tiramisu") == 0)
-	{
-		isAroma = false;
-		OS_Print("The current environment is Tiramisu, swapping to Aroma.");
-		if (!CheckEnvironmentExist("aroma"))
-			goto exit;
-	}
-	OS_PrintBlankLine();
+
+	if (!Environment::CheckEnvironmentExist(oppositeEnvironment))
+		goto exit;
+
+	PrintingHelpers::OS_Print(StringUtils::Format("The current environment is {}, swapping to {}.",
+		StringUtils::ToUpper(environment),
+		StringUtils::ToUpper(oppositeEnvironment)).c_str());
+
+	PrintingHelpers::OS_PrintBlankLine();
 
 	// default environment configuration
-	OS_PrintToLog("Modifying file: \'fs:/vol/external01/wiiu/environments/default.cfg\'");
-	defaultcfg = fopen("fs:/vol/external01/wiiu/environments/default.cfg","w");
+	PrintingHelpers::OS_PrintToLog(StringUtils::Format("Modifying file: \'{}default.cfg\'", DEFAULT_ENVIRONMENT_SD_PATH).c_str());
+	defaultcfg = fopen(StringUtils::Format("{}default.cfg", DEFAULT_ENVIRONMENT_SD_PATH).c_str(), "w");
+
 	if (isAroma)
-	{
 		fputs("tiramisu", defaultcfg);
-		OS_Print("Changed default environment to Tiramisu.");
-	}
 	else
-	{
 		fputs("aroma", defaultcfg);
-		OS_Print("Changed default enviroment to Aroma.");
-	}
+
+	PrintingHelpers::OS_Print(StringUtils::Format("Changed default environment to {}.", StringUtils::ToUpper(environment)).c_str());
 	fclose(defaultcfg);	
 	
 	// autoboot configuration
+	PrintingHelpers::OS_PrintToLog(StringUtils::Format("Modifying file: \'{}{}/autoboot.cfg\'", DEFAULT_ENVIRONMENT_SD_PATH, oppositeEnvironment).c_str());
+	autobootcfg = fopen(StringUtils::Format("{}{}/autoboot.cfg", DEFAULT_ENVIRONMENT_SD_PATH, oppositeEnvironment).c_str(), "w");
+
 	if (isAroma)
 	{
-		OS_PrintToLog("Modifying file: \'fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg\'");
-		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/tiramisu/autoboot.cfg", "w");
 		if (status.hold & VPAD_BUTTON_B)
-		{
-			fputs("wiiu_menu", autobootcfg);
-			OS_Print("Wrote \'wiiu_menu\' to Tiramisu autoboot.");
-		}
+			autobootName = "wiiu_menu";
 		else
-		{
-			fputs("homebrew_launcher", autobootcfg);
-			OS_Print("Wrote \'homebrew_launcher\' to Tiramisu autoboot.");
-		}
-		
+			autobootName = "homebrew_launcher";
 	}
 	else
-	{
-		OS_Print("Modifying file: \'fs:/vol/external01/wiiu/environments/aroma/autoboot.cfg\'");
-		autobootcfg = fopen("fs:/vol/external01/wiiu/environments/aroma/autoboot.cfg", "w");
-		fputs("wiiu_menu", autobootcfg);
-		OS_Print("Wrote \'wiiu_menu\' to Aroma autoboot.");
-	}
-	OS_PrintBlankLine();
+		autobootName = "wiiu_menu";
+
+	fputs(autobootName, autobootcfg);
+
+	PrintingHelpers::OS_Print(StringUtils::Format("{} autoboot set to \'{}\'.", StringUtils::FirstToUpper(oppositeEnvironment), autobootName).c_str());
+	PrintingHelpers::OS_PrintBlankLine();
 
 	fclose(autobootcfg);
 
+	// finish up
 	finishedSuccessfully = true;
-	OS_Print("Environment swap successful!");
+	PrintingHelpers::OS_Print("Environment swap SUCCESS!");
 exit:
 	// write status to screen, flip buffers, and sleep for 5 seconds
-	OS_PrintBlankLine();
+	PrintingHelpers::OS_PrintBlankLine();
 	if (finishedSuccessfully)
-		OS_Print("Rebooting in 5 seconds...");
+		PrintingHelpers::OS_Print("Rebooting in 5 seconds...");
 	else
-		OS_Print("An error occurred! Exiting to menu in 5 seconds...");
+		PrintingHelpers::OS_Print("An error occurred! Exiting in 5 seconds...");
 
-	OSScreenFlipBuffers();
+	PrintingHelpers::OSScreenFlipBuffers();
 	OSSleepTicks(OSSecondsToTicks(5));
 
 	if (finishedSuccessfully)

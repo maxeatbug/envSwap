@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <app version="1">
-	<name>Reboot to Aroma</name>
+	<name>Environment Swap</name>
 	<coder>EnvSwap Squad</coder>
-	<version>{{VERSION}}</version>
+	<version>1.0.2</version>
 	<release_date>20230628120000</release_date>
-	<short_description>EnvSwap - Reboots to the Aroma System Menu</short_description>
-	<long_description>Swaps between the Aroma and Tiramisu environments for people who need to use ELF homebrew or need to use HBL apps.</long_description>
+	<short_description>Reboot to Aroma</short_description>
+<long_description> 
+	        EnvSwap - Reboots you to the Aroma System Menu
+
+	- This app will change your default ENVIRONMENT and
+	the default BOOT TITLE order
+	- It allows you to swap between the Aroma and Tiramisu environments easily
+	- Useful for people who want to run legacy .ELF homebrew,
+	or need to use the Homebrew Launcher-only apps
+</long_description>
 	<category>Misc</category>
 	<url>https://github.com/bigmaxine/EnvSwap/</url>
 </app>

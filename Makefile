@@ -49,9 +49,9 @@ VERSION				:=	1.0.2
 CFLAGS				:=	-g -Wall -O2 -ffunction-sections\
 					$(MACHDEP)
 
-CFLAGS				+=	$(INCLUDE) -D__WIIU__ -D__WUT__ 
+CFLAGS				+=	$(INCLUDE) -D__WIIU__ -D__WUT__
 
-CXXFLAGS			:=	$(CFLAGS)
+CXXFLAGS			:=	$(CFLAGS) -std=c++2a
 
 ASFLAGS				:=	-g -Wint-conversion $(ARCH)
 LDFLAGS				:=	-g -Wint-conversion $(ARCH) $(RPXSPECS) -Wl,-Map,$(notdir $*.map)
