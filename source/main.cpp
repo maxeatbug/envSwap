@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	PrintingHelpers::OS_PrintBlankLine();
 
 	// environment checking
-	if (environment.compare("legacy") != 0) // string.compare("string2") == 0 basically just returns true if they are the same
+	if (environment.compare("legacy") == 0) // string.compare("string2") == 0 basically just returns true if they are the same
 	{
 		// extra whitespace in string for proper wrapping
 		PrintingHelpers::OS_Print(StringUtils::Format("The current environment is legacy or unmodded, please use   {} and {} for this application.",
