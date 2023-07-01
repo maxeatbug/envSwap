@@ -2,7 +2,7 @@
 <app version="1">
 	<name>Environment Swap</name>
 	<coder>EnvSwap Squad</coder>
-	<version>1.0.2</version>
+	<version>{{VERSION}}</version>
 	<release_date>20230628120000</release_date>
 	<short_description>Reboot to Aroma</short_description>
 <long_description> 
