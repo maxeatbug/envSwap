@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	OS_PrintBlankLine();
 
 	// environment checking
-	if (environment.compare("legacy") != 0)
+	if (environment.compare("legacy") == 0)
 	{
 		isAroma = false;
 		OS_Print("The current environment is legacy or unmodded, please use   Tiramisu/Aroma for this application."); // whitespace for proper wrapping
@@ -113,20 +113,17 @@ exit:
 	else if (isAroma)
 		SYSLaunchMenu();
 
-	while (WHBProcIsRunning()) {}
+	while (WHBProcIsRunning())
+	{
+		if (!isAroma)
+			break;
+	}
 	
 	// exit code
 	Mocha_DeInitLibrary();
 
 	WHBLogConsoleFree();
-
-	if (isAroma)
-		WHBProcShutdown();
-	else
-	{
-		WHBProcStopRunning();
-		_Exit(0);
-	}
+	WHBProcShutdown();
 
 	return 0;
 }

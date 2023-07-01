@@ -6,16 +6,16 @@ ifeq ($(strip $(DEVKITPRO)),)
 $(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>/devkitpro")
 endif
 
-TOPDIR ?= $(CURDIR)
+TOPDIR				?=	$(CURDIR)
 
 #-------------------------------------------------------------------------------
 # APP_NAME sets the long name of the application
 # APP_SHORTNAME sets the short name of the application
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
-APP_NAME		:= Reboot to Tiramisu
-APP_SHORTNAME		:= EnvSwap
-APP_AUTHOR		:= maxiine, TraceEntertains
+APP_NAME			:=	Reboot to Tiramisu
+APP_SHORTNAME		:=	EnvSwap
+APP_AUTHOR			:=	maxiine, TraceEntertains
 
 include $(DEVKITPRO)/wut/share/wut_rules
 
@@ -30,39 +30,39 @@ include $(DEVKITPRO)/wut/share/wut_rules
 # TV_SPLASH is the image displayed during bootup on the TV, leave blank to use default rule
 # DRC_SPLASH is the image displayed during bootup on the DRC, leave blank to use default rule
 #-------------------------------------------------------------------------------
-DIST_NON_BUILD  :=      dist
-DIST		:=	../$(DIST_NON_BUILD)
-TARGET		:=	EnvSwap
-BUILD		:=	build
-SOURCES		:=	source
-DATA		:=	data
-INCLUDES	:=	include
-CONTENT		:=
-ICON		:=      meta/icon.png
-TV_SPLASH	:=      meta/tv-splash.png
-DRC_SPLASH	:=      meta/drc-splash.png
-VERSION         :=      1.0.2
+DIST_NON_BUILD		:=	dist
+DIST				:=	../$(DIST_NON_BUILD)
+TARGET				:=	EnvSwap
+BUILD				:=	build
+SOURCES				:=	source
+DATA				:=	data
+INCLUDES			:=	include
+CONTENT				:=
+ICON				:=	meta/icon.png
+TV_SPLASH			:=	meta/tv-splash.png
+DRC_SPLASH			:=	meta/drc-splash.png
+VERSION				:=	1.0.2
 
 #-------------------------------------------------------------------------------
 # options for code generation
 #-------------------------------------------------------------------------------
-CFLAGS	:=	-g -Wall -O2 -ffunction-sections\
-			$(MACHDEP)
+CFLAGS				:=	-g -Wall -O2 -ffunction-sections\
+					$(MACHDEP)
 
-CFLAGS	+=	$(INCLUDE) -D__WIIU__ -D__WUT__ 
+CFLAGS				+=	$(INCLUDE) -D__WIIU__ -D__WUT__ 
 
-CXXFLAGS	:= $(CFLAGS)
+CXXFLAGS			:=	$(CFLAGS)
 
-ASFLAGS	:=	-g -Wint-conversion $(ARCH)
-LDFLAGS	=	-g -Wint-conversion $(ARCH) $(RPXSPECS) -Wl,-Map,$(notdir $*.map)
+ASFLAGS				:=	-g -Wint-conversion $(ARCH)
+LDFLAGS				:=	-g -Wint-conversion $(ARCH) $(RPXSPECS) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= 	-lwut -lmocha
+LIBS				:=	-lwut -lmocha
 
 #-------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level
 # containing include and lib
 #-------------------------------------------------------------------------------
-LIBDIRS	:= $(PORTLIBS) $(WUT_ROOT) $(WUT_ROOT)/usr
+LIBDIRS				:=	$(PORTLIBS) $(WUT_ROOT) $(WUT_ROOT)/usr
 
 #-------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -71,39 +71,39 @@ LIBDIRS	:= $(PORTLIBS) $(WUT_ROOT) $(WUT_ROOT)/usr
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #-------------------------------------------------------------------------------
 
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
-export TOPDIR	:=	$(CURDIR)
+export OUTPUT		:=	$(CURDIR)/$(TARGET)
+export TOPDIR		:=	$(CURDIR)
 
-export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
+export VPATH		:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 			$(foreach dir,$(DATA),$(CURDIR)/$(dir))
 
-export DEPSDIR	:=	$(CURDIR)/$(BUILD)
+export DEPSDIR		:=	$(CURDIR)/$(BUILD)
 
-CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
-SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
-BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
+CFILES				:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
+CPPFILES			:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
+SFILES				:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
+BINFILES			:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 
 #-------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
 #-------------------------------------------------------------------------------
 ifeq ($(strip $(CPPFILES)),)
 #-------------------------------------------------------------------------------
-	export LD	:=	$(CC)
+export LD			:=	$(CC)
 #-------------------------------------------------------------------------------
 else
 #-------------------------------------------------------------------------------
-	export LD	:=	$(CXX)
+export LD			:=	$(CXX)
 #-------------------------------------------------------------------------------
 endif
 #-------------------------------------------------------------------------------
 
 export OFILES_BIN	:=	$(addsuffix .o,$(BINFILES))
 export OFILES_SRC	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
-export OFILES 	:=	$(OFILES_BIN) $(OFILES_SRC)
+export OFILES		:=	$(OFILES_BIN) $(OFILES_SRC)
 export HFILES_BIN	:=	$(addsuffix .h,$(subst .,_,$(BINFILES)))
 
-export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
+export INCLUDE		:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 			-I$(CURDIR)/$(BUILD)
 
@@ -163,18 +163,18 @@ get_version:
 else
 .PHONY:	all
 
-DEPENDS	:=	$(OFILES:.o=.d)
+DEPENDS				:=	$(OFILES:.o=.d)
 
 #-------------------------------------------------------------------------------
 # main targets
 #-------------------------------------------------------------------------------
-all	        :	$(OUTPUT).wuhb publish
+all					:	$(OUTPUT).wuhb publish
 
-$(OUTPUT).wuhb	:	$(OUTPUT).rpx
-$(OUTPUT).rpx	:	$(OUTPUT).elf
-$(OUTPUT).elf	:	$(OFILES)
+$(OUTPUT).wuhb		:	$(OUTPUT).rpx
+$(OUTPUT).rpx		:	$(OUTPUT).elf
+$(OUTPUT).elf		:	$(OFILES)
 
-$(OFILES_SRC)	:       $(HFILES_BIN)
+$(OFILES_SRC)		:	$(HFILES_BIN)
 
 publish:
 # setup dist
