@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	else
 		fputs("aroma", defaultcfg);
 
-	PrintingHelpers::OS_Print(StringUtils::Format("Changed default environment to {}.", StringUtils::ToUpper(environment)).c_str());
+	PrintingHelpers::OS_Print(StringUtils::Format("Changed default environment to {}.", StringUtils::ToUpper(oppositeEnvironment)).c_str());
 	fclose(defaultcfg);	
 	
 	// autoboot configuration
