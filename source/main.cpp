@@ -53,7 +53,11 @@ int main(int argc, char **argv)
 	//goto exit;
 
 	if (!Environment::CheckEnvironmentExist(oppositeEnvironment))
+	{
+		PrintingHelpers::OS_Print(StringUtils::Format("The {} environment does not exist!", StringUtils::ToUpper(oppositeEnvironment)).c_str());
+		PrintingHelpers::OS_PrintBlankLine();
 		goto exit;
+	}
 
 	PrintingHelpers::OS_Print(StringUtils::Format("The current environment is {}, swapping to {}.",
 		StringUtils::ToUpper(environment),
@@ -103,7 +107,7 @@ exit:
 	if (finishedSuccessfully)
 		PrintingHelpers::OS_Print("Rebooting in 5 seconds...");
 	else
-		PrintingHelpers::OS_Print("An error occurred! Exiting in 5 seconds...");
+		PrintingHelpers::OS_Print("The application will now close...");
 
 	PrintingHelpers::OSScreenFlipBuffers();
 	OSSleepTicks(OSSecondsToTicks(5));
