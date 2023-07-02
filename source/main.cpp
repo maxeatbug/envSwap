@@ -54,7 +54,8 @@ int main(int argc, char **argv)
 
 	if (!Environment::CheckEnvironmentExist(oppositeEnvironment))
 	{
-		PrintingHelpers::OS_Print(StringUtils::Format("The {} environment does not exist!", StringUtils::ToUpper(oppositeEnvironment)).c_str());
+		PrintingHelpers::OS_Print("The environment you are trying to switch to is not found!");
+		PrintingHelpers::OS_Print(StringUtils::Format("The {} environment is not installed.", StringUtils::ToUpper(oppositeEnvironment)).c_str());
 		PrintingHelpers::OS_PrintBlankLine();
 		goto exit;
 	}
