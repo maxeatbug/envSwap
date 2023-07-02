@@ -48,6 +48,10 @@ int main(int argc, char **argv)
 	else if (environment.compare("aroma") == 0)
 		isAroma = true;
 
+	// testing code
+	PrintingHelpers::OS_Print("This is an error exiting test.");
+	goto exit;
+
 	if (!Environment::CheckEnvironmentExist(oppositeEnvironment))
 		goto exit;
 
