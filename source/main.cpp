@@ -49,8 +49,8 @@ int main(int argc, char **argv)
 		isAroma = true;
 
 	// testing code
-	PrintingHelpers::OS_Print("This is an error exiting test.");
-	goto exit;
+	//PrintingHelpers::OS_Print("This is an error exiting test.");
+	//goto exit;
 
 	if (!Environment::CheckEnvironmentExist(oppositeEnvironment))
 		goto exit;
