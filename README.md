@@ -1,7 +1,7 @@
-![EnvSwap - Github Banner](https://github.com/bigmaxine/EnvSwap/assets/73800394/b63358b4-6e4d-4f35-a170-60b95dd52f21)
+![envSwap - Github Banner](https://github.com/bigmaxine/envSwap/assets/73800394/b63358b4-6e4d-4f35-a170-60b95dd52f21)
 # This is <ins>NOT</ins> a port of HBL to Aroma and <ins>NOT</ins> an application to use .ELF homebrew on Aroma.
 
-## Wii U Environment Swapper
+## envSwap
 
 This is a slightly overengineered app that just restarts your console and swaps the environment, with the purpose of running Tiramisu applications easier instead of rebooting your console manually, holding X and then doing all of the EnvironmentLoader stuff manually.<br>
 
