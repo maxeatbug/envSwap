@@ -14,9 +14,8 @@ TOPDIR				?=	$(CURDIR)
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
 APP_NAME			:=	Reboot to Tiramisu
-APP_SHORTNAME		:=	EnvSwap
-APP_AUTHOR			:=	maxiine, TraceEntertains
-
+APP_SHORTNAME		:=	envSwap
+APP_AUTHOR			:=	TraceEntertains, Maxine
 include $(DEVKITPRO)/wut/share/wut_rules
 
 #-------------------------------------------------------------------------------
@@ -32,7 +31,7 @@ include $(DEVKITPRO)/wut/share/wut_rules
 #-------------------------------------------------------------------------------
 DIST_NON_BUILD		:=	dist
 DIST				:=	../$(DIST_NON_BUILD)
-TARGET				:=	EnvSwap
+TARGET				:=	envSwap
 BUILD				:=	build
 SOURCES				:=	source
 DATA				:=	data
@@ -179,13 +178,13 @@ $(OFILES_SRC)		:	$(HFILES_BIN)
 publish:
 # setup dist
 	@rm -fr $(DIST)
-	@mkdir -p $(DIST)/wiiu/apps/_EnvSwap
+	@mkdir -p $(DIST)/wiiu/apps/_envSwap
 # copy files
-	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_EnvSwap 
-	@cp ../EnvSwap.rpx $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.rpx
-	@cp ../EnvSwap.wuhb $(DIST)/wiiu/apps/_EnvSwap/EnvSwap.wuhb
+	@cp ../meta_hbl/* $(DIST)/wiiu/apps/_envSwap 
+	@cp ../envSwap.rpx $(DIST)/wiiu/apps/_envSwap/envSwap.rpx
+	@cp ../envSwap.wuhb $(DIST)/wiiu/apps/_envSwap/envSwap.wuhb
 # set version
-	@sed -i 's/{{VERSION}}/$(VERSION)/g' $(DIST)/wiiu/apps/_EnvSwap/meta.xml
+	@sed -i 's/{{VERSION}}/$(VERSION)/g' $(DIST)/wiiu/apps/_envSwap/meta.xml
 # zip to file
 	@7z a -tzip ../$(TARGET)-$(VERSION).zip ../dist/wiiu
 
