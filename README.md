@@ -1,3 +1,7 @@
+THIS PROJECT IS DISCONTINUED
+ALL ISSUES SHOULD BE BROUGHT TO https://github.com/TraceEntertains/EnvSwap, WHICH IS THE UPDATED VERSION OF THIS PROJECT.
+
+
 ![envSwap - Github Banner](https://github.com/bigmaxine/envSwap/assets/73800394/b63358b4-6e4d-4f35-a170-60b95dd52f21)
 # This is <ins>NOT</ins> a port of HBL to Aroma and <ins>NOT</ins> an application to use .ELF homebrew on Aroma.
 
